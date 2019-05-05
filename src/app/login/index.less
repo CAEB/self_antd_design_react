@@ -1,0 +1,95 @@
+.user-login {
+  width: 388px;
+  margin: 0 auto;
+  flex: 1;
+  color: rgba(0, 0, 0, .65);
+
+  .user-login-top {
+    margin-bottom: 30px;
+
+    .user-login-top-tab {
+      cursor: pointer;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+
+    .user-login-top-tab-active {
+      color: #1890ff;
+      border-bottom: 2px solid#1890ff;
+    }
+
+    .user-login-top-tab:hover {
+      color: #1890ff;
+    }
+  }
+
+  .user-login-btn {
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .045);
+    cursor: pointer;
+  }
+
+  .user-login-bottom {
+    margin-top: 20px;
+
+    >div {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .user-login-bottom-left {
+      span {
+        display: inline-block;
+        height: 30px;
+        vertical-align: top;
+      }
+
+      .icon {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+
+      .icon-zfb {
+        background: url('~@assets/login/zfb.svg');
+        background-size: 30px 30px;
+      }
+
+      .icon-zfb:hover {
+        background: url('~@assets/login/zfb_active.svg');
+        background-size: 30px 30px;
+      }
+
+      .icon-tb {
+        background: url('~@assets/login/tb.svg');
+        background-size: 30px 30px;
+      }
+
+      .icon-tb:hover {
+        background: url('~@assets/login/tb_active.svg');
+        background-size: 30px 30px;
+      }
+
+      .icon-wb {
+        background: url('~@assets/login/wb.svg');
+        background-size: 30px 30px;
+      }
+
+      .icon-wb:hover {
+        background: url('~@assets/login/wb_active.svg');
+        background-size: 30px 30px;
+      }
+    }
+
+    .user-login-bottom-right {
+      color: #1890ff;
+    }
+  }
+}

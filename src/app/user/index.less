@@ -1,0 +1,63 @@
+.user {
+  width: 100%;
+  height: 100vh;
+  background: #f0f2f5;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .user-header {
+    text-align: center;
+    padding-top: 50px;
+    box-sizing: border-box;
+
+    .user-header-top {
+      height: 44px;
+
+      img {
+        width: 44px;
+        height: 44px;
+        vertical-align: middle;
+      }
+
+      span {
+        color: rgba(0, 0, 0, .85);
+        font-weight: 600;
+        font-size: 33px;
+        position: relative;
+        top: 10px;
+        left: 10px;
+      }
+    }
+
+    .user-header-bottom {
+      margin-top: 20px;
+      margin-bottom: 40px;
+      color: rgba(0, 0, 0, .45);
+      font-size: 14px;
+    }
+  }
+
+  .user-footer {
+    text-align: center;
+    color: rgba(0, 0, 0, .45);
+    margin: 48px 0 24px;
+
+    .user-footer-lists {
+      margin-bottom: 18px;
+
+      a {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .user {
+    background-image: url('~@assets/user/user_bg.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center 110px;
+  }
+}
