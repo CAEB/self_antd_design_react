@@ -11,6 +11,7 @@
       cursor: pointer;
       padding: 12px;
       box-sizing: border-box;
+      transition: color .3s linear;
     }
 
     .user-login-top-tab-active {
@@ -34,10 +35,36 @@
     cursor: pointer;
   }
 
+  .user-login-content {
+    .user-login-content-input {
+      width: 100%;
+      display: flex;
+      margin-bottom: 24px;
+
+      input[type="text"] {
+        flex: 1;
+        height: 40px;
+        color: rgba(0, 0, 0, .65);
+      }
+
+      button {
+        width: 25%;
+        margin-left: 20px;
+      }
+
+      .user-login-content-input-text {
+        position: relative;
+        top: 2px;
+        left: 10px;
+      }
+
+    }
+  }
+
   .user-login-bottom {
     margin-top: 20px;
 
-    >div {
+    >div, >a {
       height: 30px;
       line-height: 30px;
     }

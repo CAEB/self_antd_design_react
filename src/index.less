@@ -1,0 +1,321 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+ol,
+ul,
+li {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html,
+body {
+  width: 100%;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", "微软雅黑", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 14px;
+}
+
+body {
+  line-height: 1;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+button,
+i {
+  transition: all .3s linear;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+input,
+button {
+  line-height: 1.5;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  transition: all .3s;
+  box-sizing: border-box;
+}
+
+input {
+  text-indent: 0.8em;
+}
+
+input:hover,
+button:hover {
+  border-color: #40a9ff;
+}
+
+button:hover {
+  color: #40a9ff;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed!important;
+}
+
+button {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  .loading {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url('~@assets/common/loading.svg') no-repeat;
+    background-size: 24px 24px;
+    animation: loadingCircle 1s infinite linear;
+  }
+
+  @keyframes loadingCircle {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg)
+    }
+  }
+
+}
+
+input:focus,
+button:focus {
+  border-color: #40a9ff;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
+}
+
+/* has-error */
+input.has-error {
+  border-color: #ff4d4f;
+}
+
+input.has-error:focus {
+  box-shadow: 0 0 0 2px rgba(245, 34, 45, .2)
+}
+
+.has-error-text {
+  color: #ff4d4f;
+  position: relative;
+  top: -20px;
+  display: inline-block;
+  animation: error-animation-in .3s ease;
+}
+
+@keyframes error-animation-in {
+  from {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes error-animation-out {
+  to {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+}
+
+
+.span-checkbox {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+  transition: all .3s linear;
+  position: relative;
+}
+
+.span-checkbox:hover {
+  border-color: #40a9ff;
+}
+
+input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+input[type="checkbox"]+span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: -1px;
+  right: 0px;
+  left: -1px;
+  bottom: 0;
+  transition: all .3s linear;
+}
+
+input[type="checkbox"]+span::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+  position: relative;
+  left: 3px;
+  opacity: 0;
+  transition: all .3s linear;
+}
+
+input[type="checkbox"]:checked+span {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+input[type="checkbox"]:checked+span::after {
+  opacity: 1;
+}
