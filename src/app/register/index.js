@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import validateForm from '@utils/validate'
 import './index.less'
@@ -68,12 +69,13 @@ class Register extends Component {
           }
         }
       },
-      isShow: false,
+      isShow: false, // 密码提示
       sendObj: {
         sended: false,
         sending: false,
         text: '获取验证码'
-      }
+      },
+      isSubmit: false // 提交加载
     }
   }
 
@@ -186,7 +188,8 @@ class Register extends Component {
   }
 
   formSubmit() {
-    const { validateRules } = this.state;
+    const { validateRules, email } = this.state
+    const { history } = this.props;
     ['email', 'password', 'confirmPassword', 'phoneNumber', 'verifyCode'].forEach(data => {
       this.setState({
         validateRules: validateForm(validateRules, data, this.state[data])
@@ -195,12 +198,20 @@ class Register extends Component {
 
     const isValid = Object.keys(validateRules).every(data => validateRules[data].results.verify)
     if (isValid) {
-      console.log('submit')
+      this.setState({
+        isSubmit: true
+      })
+
+      setTimeout(() => {
+        localStorage.setItem('email', email)
+        history.push('/user/register-result')
+      }, 2000)
+      
     }
   }
 
   render() {
-    const { sendObj } = this.state
+    const { sendObj, isSubmit } = this.state
     const { email, password, confirmPassword, phoneNumber, verifyCode } = this.state.validateRules
     return (
       <div className="user-register">
@@ -230,7 +241,8 @@ class Register extends Component {
         </div>
         {verifyCode.results.text && <span className="has-error-text">{verifyCode.results.text}</span>}
         <div className="user-register-bottom">
-          <button disabled onClick={() => this.formSubmit()}>
+          <button disabled={isSubmit} onClick={() => this.formSubmit()}>
+          {isSubmit ? <span className="loading"></span> : '注册'}
           </button>
           <a href="/user/login">使用已有账户登录</a>
         </div>
@@ -239,4 +251,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default withRouter(Register)

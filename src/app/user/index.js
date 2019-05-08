@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Register from '@app/register'
 import Login from '@app/login'
+import RegisterResult from '@app/register-result'
 import './index.less'
 import logo from '@assets/user/logo.svg'
 
@@ -9,7 +10,8 @@ class User extends Component {
   
   routeObj = {
     register: <Register />,
-    login: <Login />
+    login: <Login />,
+    'register-result': <RegisterResult />
   }
 
   render() {
