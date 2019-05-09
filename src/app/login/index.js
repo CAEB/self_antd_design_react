@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import validateForm from '@utils/validate'
 import './index.less'
@@ -58,7 +59,9 @@ class Login extends Component {
         sended: false,
         sending: false,
         text: '获取验证码'
-      }
+      },
+      isSubmit: false,
+      isHasError: false
     }
   }
 
@@ -124,7 +127,8 @@ class Login extends Component {
   }
 
   formSubmit() {
-    const { type, validateRules } = this.state
+    const { type, validateRules, username, password } = this.state
+    const { history } = this.props
     let isValid = false
 
     if (type === 'username') {
@@ -134,6 +138,29 @@ class Login extends Component {
         })
       })
       isValid = ['username', 'password'].every(data => validateRules[data].results.verify)
+
+      if (isValid) {
+        this.setState({
+          isSubmit: true
+        })
+        setTimeout(() => {
+          if (username === 'admin' && password === '123456') {
+            this.setState({
+              isHasError: false
+            })
+            localStorage.setItem('user', 'user')
+            history.push('/')
+          } else {
+            this.setState({
+              isHasError: true
+            })
+          }
+
+          this.setState({
+            isSubmit: false
+          })
+        }, 2000)
+      }
     } else {
       ['phoneNumber', 'verifyCode'].forEach(data => {
         this.setState({
@@ -141,17 +168,25 @@ class Login extends Component {
         })
       })
       isValid = ['phoneNumber', 'verifyCode'].every(data => validateRules[data].results.verify)
+
+      if (isValid) {
+        this.setState({
+          isSubmit: true
+        })
+        setTimeout(() => {
+          this.setState({
+            isSubmit: false
+          })
+          localStorage.setItem('user', 'user')
+          history.push('/')
+        }, 2000)
+
+      }
     }
-
-    if (isValid) {
-      localStorage.setItem('username', this.state.username || this.state.phoneNumber)
-    }
-
-
   }
 
   render() {
-    const { type, sendObj } = this.state
+    const { type, sendObj, isSubmit, isHasError } = this.state
     const { username, password, phoneNumber, verifyCode } = this.state.validateRules
     return (
       <div className="user-login">
@@ -165,17 +200,24 @@ class Login extends Component {
             className={`user-login-top-tab ${type === 'phone' ? 'user-login-top-tab-active' : null}`}
           >手机号登录</div>
         </div>
+        {
+          isHasError && (
+            <div className="alert-error">
+              <i></i>账户或密码错误（admin/123456）
+            </div>
+          )
+        }
         <div className="user-login-content">
           {
             type === 'username' ?
               (
                 <div>
                   <div className="user-login-content-input">
-                    <input type="text" placeholder="用户名: admin or user" value={this.state.username} className={`${username.results.verify ? '' : 'has-error'}`} onChange={event => this.handleChange('username', event)} />
+                    <input type="text" placeholder="用户名: admin" value={this.state.username} className={`${username.results.verify ? '' : 'has-error'}`} onChange={event => this.handleChange('username', event)} />
                   </div>
                   {username.results.text && <span className="has-error-text">{username.results.text}</span>}
                   <div className="user-login-content-input">
-                    <input type="password" placeholder="密码: ant.design" value={this.state.password} className={`${password.results.verify ? '' : 'has-error'}`} onChange={event => this.handleChange('password', event)} />
+                    <input type="password" placeholder="密码: 123456" value={this.state.password} className={`${password.results.verify ? '' : 'has-error'}`} onChange={event => this.handleChange('password', event)} />
                   </div>
                   {password.results.text && <span className="has-error-text">{password.results.text}</span>}
                 </div>
@@ -204,7 +246,9 @@ class Login extends Component {
             <span className="user-login-content-input-text">自动登录</span>
           </div>
         </div>
-        <button className="user-login-btn" onClick={() => this.formSubmit()}>登录</button>
+        <button disabled={isSubmit} className="user-login-btn" onClick={() => this.formSubmit()}>
+          {isSubmit ? <span className="loading"></span> : '登录'}
+        </button>
         <div className="user-login-bottom flex flex-between">
           <div className="user-login-bottom-left">
             <span>其他登录方式</span>
@@ -219,4 +263,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Login)

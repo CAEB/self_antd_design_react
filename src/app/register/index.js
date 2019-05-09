@@ -204,6 +204,7 @@ class Register extends Component {
 
       setTimeout(() => {
         localStorage.setItem('email', email)
+        localStorage.setItem('user', 'user')
         history.push('/user/register-result')
       }, 2000)
       
