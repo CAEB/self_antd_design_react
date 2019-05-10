@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Register from '@app/register'
 import Login from '@app/login'
-import RegisterResult from '@app/register-result'
+import RegisterResult from '@app/register_result'
 import './index.less'
 import logo from '@assets/user/logo.svg'
 
