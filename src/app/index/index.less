@@ -267,26 +267,26 @@
     }
 
     /* tab-show 动画 */
-    .tab-show-enter {
+    .scaleY-enter {
       opacity: 0.01;
       transform: scaleY(0.8);
       transform-origin: 0 0;
     }
 
-    .tab-show-enter-active {
+    .scaleY-enter-active {
       opacity: 1;
       transform: scaleY(1);
       transform-origin: 0 0;
       transition: all 200ms ease-out;
     }
 
-    .tab-show-exit {
+    .scaleY-exit {
       opacity: 1;
       transform: scaleY(1);
       transform-origin: 0 0;
     }
 
-    .tab-show-exit-active {
+    .scaleY-exit-active {
       opacity: 0;
       transform: scaleY(0.8);
       transform-origin: 0 0;
@@ -294,22 +294,22 @@
     }
 
     /* tab-change 动画 */
-    .tab-change-enter {
+    .opacity-enter {
       opacity: 0.01;
     }
 
-    .tab-change-enter-active {
+    .opacity-enter-active {
       opacity: 1;
-      transition: all 300ms ease-out;
+      transition: all .45s ease-out;
     }
 
-    .tab-change-exit {
+    .opacity-exit {
       opacity: 1;
     }
 
-    .tab-change-exit-active {
+    .opacity-exit-active {
       opacity: 0;
-      transition: all 300ms ease-in;
+      transition: all .45s ease-in;
     }
   }
 }

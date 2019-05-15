@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 
 import HeaderXl from '@app/index/header_xl'
 import Tabs from '@app/index/tab'
+import message from '@app/index/message/message'
 import './index.less'
 
 class Index extends Component {
@@ -21,6 +22,25 @@ class Index extends Component {
     axios.get('/user/message').then(res => this.setState({
       messages: res.data
     }))
+  }
+
+  setNotificationRead(id) {
+    let {messages} = this.state
+
+    messages = messages.map(msg => {
+      if (msg.id === id) {
+        return {
+          ...msg,
+          read: true
+        }
+      }
+
+      return msg
+    })
+    
+    this.setState({
+      messages
+    })
   }
 
   /**
@@ -74,6 +94,7 @@ class Index extends Component {
     const { TabPane } = Tabs
     const { searchInputIsShow, messages, tabShow } = this.state
     const { notifications, messages: msgs, events } = this.getMessages(messages)
+    const {length} = messages.filter(msg => !msg.read)
 
     return (
       <div className="index flex flex-between">
@@ -95,18 +116,18 @@ class Index extends Component {
               </div>
               <div className="handle-messages">
                 <i onClick={() => this.setState({tabShow: !tabShow})}>
-                  <span>{messages.length}</span>
+                  <span>{length}</span>
                 </i>
                 <CSSTransition
                   in={tabShow}
                   timeout={200}
-                  classNames="tab-show"
+                  classNames="scaleY"
                   unmountOnExit>
                   <Tabs messages={messages} activeKey="1" className="self-tab">
                     <TabPane tab={`通知(${notifications.length})`} tabKey="1" className="self-tab-pane">
                       {
                         notifications.map(notification => (
-                          <div className="list notification-list flex-vertical-center flex-between" key={notification.id} style={{ opacity: notification.read ? '.4' : '1' }}>
+                          <div className="list notification-list flex-vertical-center flex-between" key={notification.id} onClick={() => this.setNotificationRead(notification.id)} style={{ opacity: notification.read ? '.4' : '1' }}>
                             <div className="notification-list-left">
                               <img src={notification.avatar} alt="icon" />
                             </div>
@@ -119,7 +140,7 @@ class Index extends Component {
                       }
                       <div className="tab-footer flex flex-between">
                         <div className="tab-footer-item">清空通知</div>
-                        <div className="tab-footer-item">查看更多</div>
+                        <div className="tab-footer-item" onClick={() => message.info('查看更多click')}>查看更多</div>
                       </div>
                     </TabPane>
                     <TabPane tab={`消息(${msgs.length})`} tabKey="2" className="self-tab-pane">
@@ -170,6 +191,7 @@ class Index extends Component {
                   <img src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" alt="user-avatar" />
                   <span>Serati Ma</span>
                 </div>
+
               </div>
             </div>
           </header>

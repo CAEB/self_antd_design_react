@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 
 import './index.less'
 
+
 const TabPane = props => {
   return <div></div>
 }
@@ -58,7 +59,7 @@ export class Tab extends Component {
         <CSSTransition
           in={activeId === tabKey}
           timeout={300}
-          classNames="tab-change"
+          classNames="opacity"
           key={tabKey}
           unmountOnExit>
           <div className={classNames}>
@@ -84,7 +85,6 @@ export class Tab extends Component {
   render() {
     const { tabLinkLeft, tabLinkWidth } = this.state
     const { children, className } = this.props
-
     return (
       <div className={`tab ${className}`}>
         <div className="tab-header">
@@ -93,7 +93,6 @@ export class Tab extends Component {
             <div className="tab-link" style={{ left: `${tabLinkLeft}px`, width: `${tabLinkWidth}px` }}></div>
           </div>
         </div>
-
         <div className="tab-content">
           <div className="tab-content-wrapper flex">
             {this.renderTabContent(children)}
