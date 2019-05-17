@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { CSSTransition } from 'react-transition-group'
+import Icon from '@components/icon'
 
 import HeaderXl from '@app/index/header_xl'
 import Tabs from '@app/index/tab'
@@ -14,7 +15,8 @@ class Index extends Component {
     this.state = {
       searchInputIsShow: false,
       messages: [],
-      tabShow: false
+      tabShow: false,
+      settingShow: false
     }
   }
 
@@ -25,7 +27,7 @@ class Index extends Component {
   }
 
   setNotificationRead(id) {
-    let {messages} = this.state
+    let { messages } = this.state
 
     messages = messages.map(msg => {
       if (msg.id === id) {
@@ -37,7 +39,7 @@ class Index extends Component {
 
       return msg
     })
-    
+
     this.setState({
       messages
     })
@@ -92,9 +94,9 @@ class Index extends Component {
 
   render() {
     const { TabPane } = Tabs
-    const { searchInputIsShow, messages, tabShow } = this.state
+    const { searchInputIsShow, messages, tabShow, settingShow } = this.state
     const { notifications, messages: msgs, events } = this.getMessages(messages)
-    const {length} = messages.filter(msg => !msg.read)
+    const { length } = messages.filter(msg => !msg.read)
 
     return (
       <div className="index flex flex-between">
@@ -115,7 +117,7 @@ class Index extends Component {
                 <div className="question-tip">使用文档</div>
               </div>
               <div className="handle-messages">
-                <i onClick={() => this.setState({tabShow: !tabShow})}>
+                <i onClick={() => this.setState({ tabShow: !tabShow })}>
                   <span>{length}</span>
                 </i>
                 <CSSTransition
@@ -160,7 +162,7 @@ class Index extends Component {
                       }
                       <div className="tab-footer flex flex-between">
                         <div className="tab-footer-item">清空消息</div>
-                        <div className="tab-footer-item">查看更多</div>
+                        <div className="tab-footer-item" onClick={() => message.info('查看更多click')}>查看更多</div>
                       </div>
                     </TabPane>
                     <TabPane tab={`待办(${events.length})`} tabKey="3" className="self-tab-pane">
@@ -179,18 +181,45 @@ class Index extends Component {
                       }
                       <div className="tab-footer flex flex-between">
                         <div className="tab-footer-item">清空通知</div>
-                        <div className="tab-footer-item">查看更多</div>
+                        <div className="tab-footer-item" onClick={() => message.info('查看更多click')}>查看更多</div>
                       </div>
                     </TabPane>
                   </Tabs>
                 </CSSTransition>
 
               </div>
-              <div className="handle-person-setting">
+              <div className="handle-person-setting" onMouseOver={() => this.setState({settingShow: true})} onMouseLeave={() => this.setState({settingShow: false})}>
                 <div className="person-info flex flex-both-center">
                   <img src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" alt="user-avatar" />
-                  <span>Serati Ma</span>
+                  <span>CAEB</span>
                 </div>
+                <CSSTransition
+                  in={settingShow}
+                  timeout={200}
+                  classNames="scaleY"
+                  unmountOnExit>
+                  <div className="person-handle-content">
+                    <ul>
+                      <li className="person-handle-item">
+                        <Icon type="user" />
+                        <span>个人中心</span>
+                      </li>
+                      <li className="person-handle-item">
+                        <Icon type="setting" />
+                        <span>个人设置</span>
+                      </li>
+                      <li className="person-handle-item">
+                        <Icon type="close-circle" />
+                        <span>触发报错</span>
+                      </li>
+                      <li className="person-handle-divider"></li>
+                      <li className="person-handle-item">
+                        <Icon type="logout" />
+                        <span>退出登录</span>
+                      </li>
+                    </ul>
+                  </div>
+                </CSSTransition>
 
               </div>
             </div>

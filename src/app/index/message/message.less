@@ -7,7 +7,6 @@
   align-items: center;
 
   .self-message-list {
-    // display: none;
     padding: 10px 16px;
     background: #fff;
     border-radius: 4px;
@@ -22,28 +21,33 @@
       top: 2px;
       margin-right: 5px;
     }
+
+
+
   }
-}
+
+  .message-enter {
+    opacity: 0;
+    transform: translateY(-5px)
+  }
+
+  .message-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: all .2s ease-out;
+  }
+
+  .message-exit {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  .message-exit-active {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all .2s ease-in;
+  }
 
 
-.opacity-enter {
-  opacity: 0;
-  transform: translateY(-5px)
-}
 
-.opacity-enter-active {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: all .2s ease-out;
-}
-
-.opacity-exit {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.opacity-exit-active {
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: all .2s ease-in;
 }

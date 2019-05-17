@@ -249,6 +249,8 @@
         }
 
         .handle-person-setting {
+          position: relative;
+
           .person-info {
             height: 64px;
 
@@ -260,6 +262,49 @@
 
             span {
               margin: 0 10px;
+            }
+          }
+
+          .person-handle-content {
+            width: 160px;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            padding-top: 10px;
+
+            ul {
+              background-color: #fff;
+              border-radius: 4px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+              padding: 4px 0;
+
+              li.person-handle-item {
+                color: rgba(0, 0, 0, .65);
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 22px;
+                white-space: nowrap;
+                cursor: pointer;
+                transition: all .3s;
+                padding: 5px 12px;
+
+                svg {
+                  vertical-align: -0.1rem;
+                  margin-right: 8px;
+                }
+              }
+
+              li.person-handle-divider {
+                height: 1px;
+                margin: 4px 0;
+                overflow: hidden;
+                line-height: 0;
+                background-color: #e8e8e8;
+              }
+
+              li.person-handle-item:hover {
+                background: #e6f7ff;
+              }
             }
           }
         }

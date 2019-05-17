@@ -18,7 +18,7 @@ const Message = ({ messages }) => (
         messages.map(({ id, type, title }) => (
           <CSSTransition
             timeout={300}
-            classNames="opacity"
+            classNames="message"
             key={id}
             unmountOnExit
           >
@@ -87,7 +87,6 @@ class RenderMessage {
   }
 
   removeMessage(id, duration, onClose) {
-
     setTimeout(() => {
       this.messages = this.messages.filter(msg => msg.id !== id)
       this.render()
